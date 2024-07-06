@@ -1,9 +1,7 @@
 package com.example.model;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.util.List;
 
@@ -18,9 +16,7 @@ public class User {
     private Long id;
     private String firstName;
     private String lastName;
-    private String email;
     private String phoneNumber;
-    private String address;
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     List<Account> accounts;

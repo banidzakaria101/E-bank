@@ -1,6 +1,7 @@
 package com.example.model;
 
 import com.example.enums.AccountType;
+import com.example.enums.BankName;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -18,9 +19,13 @@ public class Account {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    private String holderFirstName;
+    private String holderLastName;
+    private String holderPhoneNumber;
     private String accountNumber;
     private Double balance;
     private AccountType accountType;
+    private BankName bankName;
     private LocalDateTime createdAt;
 
     @ManyToOne
