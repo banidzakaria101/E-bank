@@ -8,6 +8,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -33,10 +34,10 @@ public class Account {
     private User user;
 
     @OneToMany(cascade = CascadeType.ALL)
-    List<Transaction> transactions;
+    List<Transaction> transactions = new ArrayList<>();
 
     @OneToMany(cascade = CascadeType.ALL)
-    List<Card> cards;
+    List<Card> cards = new ArrayList<>();
 
 }
 

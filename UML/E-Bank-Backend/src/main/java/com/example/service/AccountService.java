@@ -1,13 +1,16 @@
 package com.example.service;
 
 import com.example.model.Account;
+import com.example.model.Card;
 import com.example.model.User;
 import com.example.repository.AccountRepository;
 import com.example.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.temporal.ChronoUnit;
 import java.util.Optional;
 import java.util.Random;
 
@@ -30,6 +33,8 @@ public class AccountService {
             account.setAccountNumber(generateAccountNumber());
             account.setUser(user);
             account.setCreatedAt(LocalDateTime.now());
+
+            Card card = createCardForAccount(account);
             return accountRepo.save(account);
         } else {
             throw new RuntimeException("User not found");
@@ -38,11 +43,11 @@ public class AccountService {
 
     private String generateAccountNumber() {
         Random rand = new Random();
-        StringBuilder card = new StringBuilder();
+        StringBuilder number = new StringBuilder();
 
         for (int i = 0; i < 16; i++) {
             int n = rand.nextInt(10);  // Generates a number between 0 and 9
-            card.append(n);
+            number.append(n);
         }
 
         StringBuilder formattedCard = new StringBuilder();
@@ -50,9 +55,21 @@ public class AccountService {
             if (i % 4 == 0 && i != 0) {
                 formattedCard.append(" ");
             }
-            formattedCard.append(card.charAt(i));
+            formattedCard.append(number.charAt(i));
         }
 
         return formattedCard.toString();
     }
+
+    private Card createCardForAccount(Account account){
+        Card card  = new Card();
+        card.setCardNumber(account.getAccountNumber());
+        card.setCardHolderName(account.getHolderFirstName() + " " + account.getHolderLastName());
+        card.setExpiryDate(LocalDate.now().plusYears(8));
+        card.setAccount(account);
+
+        return card;
+    }
+
+
 }
