@@ -35,6 +35,10 @@ public class AccountService {
             account.setCreatedAt(LocalDateTime.now());
 
             Card card = createCardForAccount(account);
+            account.getCards().add(card);
+            user.getAccounts().add(account);
+            userRepo.save(user);
+
             return accountRepo.save(account);
         } else {
             throw new RuntimeException("User not found");

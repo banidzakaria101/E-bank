@@ -6,13 +6,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/account")
+@RequestMapping
 public class AccountController {
 
     @Autowired
     private AccountService accountService;
 
-    @PostMapping("/{userId}")
+    @PostMapping("/account/{userId}")
     public Account addAccount(@PathVariable Long userId, @RequestBody Account account) {
         return accountService.addAccount(userId, account);
     }

@@ -18,6 +18,7 @@ public class User {
     private String lastName;
     private String phoneNumber;
 
+
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     List<Account> accounts;
 }
