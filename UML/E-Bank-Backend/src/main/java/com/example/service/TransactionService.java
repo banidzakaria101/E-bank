@@ -1,5 +1,6 @@
 package com.example.service;
 
+import com.example.enums.TransactionType;
 import com.example.model.Account;
 import com.example.model.Transaction;
 import com.example.repository.AccountRepository;
@@ -34,12 +35,13 @@ public class TransactionService {
             transaction.setToAccount(account);
             transaction.setAmount(amount);
             transaction.setTimestamp(LocalDateTime.now());
+            transaction.setTransactionType(TransactionType.DEPOSIT);
 
             return transactionRepo.save(transaction);
         } else {
             throw new RuntimeException("Account not found");
         }
-
+    }
 
 //    public Transaction sendTransaction(Long fromAccountId, Long toAccountId, double amount){
 //        Optional<Account> fromAccountOp = accountRepo.findById(fromAccountId);
@@ -50,6 +52,35 @@ public class TransactionService {
 //
 //
 //    }
+
+
+    public Transaction withdraw(Long accountId, Double amount){
+        Optional<Account> accountOp = accountRepo.findById(accountId);
+
+        if(accountOp.isPresent()){
+            Account account = accountOp.get();
+
+            if (account.getBalance() >= amount){
+                account.setBalance(account.getBalance() - amount);
+                accountRepo.save(account);
+
+                Transaction transaction = new Transaction();
+                transaction.setFromAccount(account);
+                transaction.setAmount(amount);
+                transaction.setTimestamp(LocalDateTime.now());
+                transaction.setTransactionType(TransactionType.WITHDRAWAL);
+
+                return  transactionRepo.save(transaction);
+
+            }else{
+                throw new RuntimeException("Insufficient!");
+            }
+
+
+        }else {
+            throw new RuntimeException("Account dose not exist");
+        }
     }
+
 
 }

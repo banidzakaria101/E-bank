@@ -16,4 +16,9 @@ public class TransactionController {
     public Transaction deposit(@PathVariable Long accountId, @RequestParam Double amount){
         return  transactionService.deposit(accountId, amount);
     }
+
+    @PostMapping("withdraw/{accountId}")
+    public Transaction withdraw(@PathVariable Long accountId,@RequestParam Double amount){
+        return transactionService.withdraw(accountId, amount);
+    }
 }

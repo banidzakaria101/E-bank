@@ -1,6 +1,6 @@
 package com.example.enums;
 
-public enum Status {
+public enum CardStatus {
     active,
     inactive,
     blocked,

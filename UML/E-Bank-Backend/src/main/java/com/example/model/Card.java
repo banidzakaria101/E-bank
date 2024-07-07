@@ -1,6 +1,7 @@
 package com.example.model;
 
 import com.example.enums.CardType;
+import com.example.enums.CardStatus;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -21,6 +22,7 @@ public class Card {
     private String cardHolderName;
     private CardType cardType;
     private LocalDate expiryDate;
+    private CardStatus status;
 
     @ManyToOne
     @JoinColumn(name = "account_id")
