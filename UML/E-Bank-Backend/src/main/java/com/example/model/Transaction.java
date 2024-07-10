@@ -18,7 +18,6 @@ public class Transaction {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private Double amount;
-    private String beneficiary;
     private LocalDateTime timestamp;
     private TransactionType transactionType;
 
@@ -29,6 +28,12 @@ public class Transaction {
     @ManyToOne
     @JoinColumn(name = "to_acc_id")
     private Account toAccount;
+
+    @ManyToOne
+    @JoinColumn(name = "beneficiary_id")
+    Beneficiary beneficiary;
+
+
 
 
 

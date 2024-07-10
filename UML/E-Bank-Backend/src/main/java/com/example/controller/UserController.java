@@ -17,7 +17,11 @@ public class UserController {
     @PostMapping("/save")
     public User addUser(@RequestBody User user) {
         return userServices.addUser(user);
+
+
     }
+
+
 
     @DeleteMapping
     public void deleteUser(@PathVariable Long id) {

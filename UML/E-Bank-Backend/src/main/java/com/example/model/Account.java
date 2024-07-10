@@ -2,6 +2,7 @@ package com.example.model;
 
 import com.example.enums.AccountType;
 import com.example.enums.BankName;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -33,10 +34,13 @@ public class Account {
     @JoinColumn(name = "user_id")
     private User user;
 
+
     @OneToMany(cascade = CascadeType.ALL)
+    @JsonIgnore
     List<Transaction> transactions = new ArrayList<>();
 
     @OneToMany(cascade = CascadeType.ALL)
+    @JsonIgnore
     List<Card> cards = new ArrayList<>();
 
 }

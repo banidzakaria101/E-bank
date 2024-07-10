@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
+import java.util.List;
 import java.util.Optional;
 import java.util.Random;
 
@@ -73,6 +74,15 @@ public class AccountService {
         card.setAccount(account);
 
         return card;
+    }
+
+    public List<Account> getAccountByUserId(Long userId){
+        return accountRepo.findAllByuserId(userId);
+    }
+
+
+    public void deleteAccount(Long accountId) {
+            accountRepo.deleteById(accountId);
     }
 
 

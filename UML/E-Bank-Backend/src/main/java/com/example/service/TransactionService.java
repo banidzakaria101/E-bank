@@ -43,15 +43,36 @@ public class TransactionService {
         }
     }
 
-//    public Transaction sendTransaction(Long fromAccountId, Long toAccountId, double amount){
-//        Optional<Account> fromAccountOp = accountRepo.findById(fromAccountId);
-//        Optional<Account> toAccountOp = accountRepo.findById(toAccountId);
-//
-//        Account fromAccount = fromAccountOp.get();
-//        Account toAccount = toAccountOp.get();
-//
-//
-//    }
+    public Transaction sendTransaction(Long fromAccountId, Long toAccountId, Double amount) {
+        Optional<Account> fromAccountOptional = accountRepo.findById(fromAccountId);
+        Optional<Account> toAccountOptional = accountRepo.findById(toAccountId);
+
+        if (fromAccountOptional.isPresent() && toAccountOptional.isPresent()) {
+            Account fromAccount = fromAccountOptional.get();
+            Account toAccount = toAccountOptional.get();
+
+            if (fromAccount.getBalance() >= amount) {
+                fromAccount.setBalance(fromAccount.getBalance() - amount);
+                toAccount.setBalance(toAccount.getBalance() + amount);
+
+                accountRepo.save(fromAccount);
+                accountRepo.save(toAccount);
+
+                Transaction transaction = new Transaction();
+                transaction.setFromAccount(fromAccount);
+                transaction.setToAccount(toAccount);
+                transaction.setAmount(amount);
+                transaction.setTimestamp(LocalDateTime.now());
+                transaction.setTransactionType(TransactionType.TRANSFER);
+
+                return transactionRepo.save(transaction);
+            } else {
+                throw new RuntimeException("Insufficient funds");
+            }
+        } else {
+            throw new RuntimeException("Account not found");
+        }
+    }
 
 
     public Transaction withdraw(Long accountId, Double amount){
@@ -68,7 +89,7 @@ public class TransactionService {
                 transaction.setFromAccount(account);
                 transaction.setAmount(amount);
                 transaction.setTimestamp(LocalDateTime.now());
-                transaction.setTransactionType(TransactionType.WITHDRAWAL);
+                transaction.setTransactionType(TransactionType.WITHDRAW);
 
                 return  transactionRepo.save(transaction);
 

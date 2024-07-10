@@ -2,7 +2,7 @@ package com.example.enums;
 
 public enum TransactionType {
     DEPOSIT,
-    WITHDRAWAL,
+    WITHDRAW,
     TRANSFER,
-    PAYMENT
+
 }

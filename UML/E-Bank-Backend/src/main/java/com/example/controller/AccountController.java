@@ -16,4 +16,9 @@ public class AccountController {
     public Account addAccount(@PathVariable Long userId, @RequestBody Account account) {
         return accountService.addAccount(userId, account);
     }
+
+    @DeleteMapping("/delete/{accountId}")
+    public void deleteAccount(@PathVariable Long accountId) {
+        accountService.deleteAccount(accountId);
+    }
 }
