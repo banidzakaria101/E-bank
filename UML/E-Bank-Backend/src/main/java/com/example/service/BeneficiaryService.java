@@ -24,8 +24,8 @@ public class BeneficiaryService {
         beneficiaryRepo.deleteById(id);
     }
 
-      public List<Beneficiary> getAllBeneficiary (@PathVariable Long userId){
-        return beneficiaryRepo.getAllBeneficiary(userId);
+      public List<Beneficiary> findAllBeneficiary (@PathVariable Long userId){
+        return beneficiaryRepo.findAllById(userId);
     }
 
 }

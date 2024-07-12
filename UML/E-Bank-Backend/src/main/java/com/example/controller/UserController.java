@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.Optional;
 
 @RestController
+@RequestMapping("/api/user")
 public class UserController {
 
     @Autowired
@@ -17,13 +18,10 @@ public class UserController {
     @PostMapping("/save")
     public User addUser(@RequestBody User user) {
         return userServices.addUser(user);
-
-
     }
 
 
-
-    @DeleteMapping
+    @DeleteMapping("/delete/{id}")
     public void deleteUser(@PathVariable Long id) {
         userServices.deleteUser(id);
     }

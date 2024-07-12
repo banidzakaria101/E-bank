@@ -43,6 +43,10 @@ public class Account {
     @JsonIgnore
     List<Card> cards = new ArrayList<>();
 
+
+    @OneToMany(cascade = CascadeType.ALL)
+    @JsonIgnore
+    List<Beneficiary> beneficiaries;
 }
 
 

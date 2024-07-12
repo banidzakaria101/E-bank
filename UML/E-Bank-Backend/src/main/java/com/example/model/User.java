@@ -24,7 +24,5 @@ public class User {
     @JsonIgnore
     List<Account> accounts;
 
-    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
-    @JsonIgnore
-    List<Beneficiary> beneficiaries;
+
 }

@@ -20,7 +20,7 @@ public class CardService {
         return card;
     }
 
-    public Card desactivateCard(Long cardId){
+    public Card deactivateCard(Long cardId){
         Card card = cardRepo.findById(cardId).get();
         card.setStatus(CardStatus.inactive);
         return card;

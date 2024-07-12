@@ -4,12 +4,12 @@ package com.example.controller;
 import com.example.model.Beneficiary;
 import com.example.service.BeneficiaryService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@Controller
+@RestController
+@RequestMapping("/api/beneficiary")
 public class BeneficiaryController {
 
     @Autowired
@@ -27,6 +27,6 @@ public class BeneficiaryController {
 
     @GetMapping
     public List<Beneficiary> getAllBeneficiary(@PathVariable Long userId){
-       return beneficiaryService.getAllBeneficiary(userId);
+       return beneficiaryService.findAllBeneficiary(userId);
     }
 }

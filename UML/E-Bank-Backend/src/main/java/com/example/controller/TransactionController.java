@@ -7,7 +7,10 @@ import com.example.service.TransactionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
+@RequestMapping("/api/transaction")
 public class TransactionController {
 
     @Autowired
@@ -26,5 +29,10 @@ public class TransactionController {
     @PostMapping("/transaction{accountId}")
     public  Transaction transaction(@RequestParam Long fromAccountId, @RequestParam Long toAccountId,@RequestParam Double amount){
         return  transactionService.sendTransaction(fromAccountId, toAccountId, amount);
+    }
+
+    @GetMapping("/all-transactions/{accountId}")
+    public List<Transaction> getAllTransactions(@PathVariable Long accountId){
+        return transactionService.getAllTransactions(accountId);
     }
 }

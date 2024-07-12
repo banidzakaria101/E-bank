@@ -6,8 +6,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
-@Controller
+@RestController
+@RequestMapping("/api/card")
 public class CardController {
 
     @Autowired
@@ -15,16 +18,16 @@ public class CardController {
 
     @PostMapping("/deactivate/{cardId}")
     public Card deactivate(@PathVariable Long cardId){
-        return cardService.desactivateCard(cardId);
+        return cardService.activateCard(cardId);
     }
 
     @PostMapping("/activate/{cardId}")
     public Card activate(@PathVariable Long cardId){
-        return cardService.desactivateCard(cardId);
+        return cardService.deactivateCard(cardId);
     }
 
     @PostMapping("/block/{cardId}")
     public Card blockCard(@PathVariable Long cardId){
-        return cardService.desactivateCard(cardId);
+        return cardService.blockCard(cardId);
     }
 }

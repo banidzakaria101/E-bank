@@ -5,8 +5,11 @@ import com.example.service.AccountService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+
+import java.util.List;
+
 @RestController
-@RequestMapping
+@RequestMapping("/api/account")
 public class AccountController {
 
     @Autowired
@@ -20,5 +23,10 @@ public class AccountController {
     @DeleteMapping("/delete/{accountId}")
     public void deleteAccount(@PathVariable Long accountId) {
         accountService.deleteAccount(accountId);
+    }
+
+    @GetMapping("/all-accounts/{userId}")
+    public List<Account> getAllAccounts(@PathVariable Long userId){
+        return  accountService.getAccountsByUserId(userId);
     }
 }

@@ -76,7 +76,7 @@ public class AccountService {
         return card;
     }
 
-    public List<Account> getAccountByUserId(Long userId){
+    public List<Account> getAccountsByUserId(Long userId){
         return accountRepo.findAllByuserId(userId);
     }
 
