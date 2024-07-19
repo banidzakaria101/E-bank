@@ -15,9 +15,9 @@ public class BeneficiaryController {
     @Autowired
     BeneficiaryService beneficiaryService;
 
-    @PostMapping
-    public Beneficiary addBeneficiary(@RequestBody Beneficiary beneficiary){
-        return beneficiaryService.addBeneficiary(beneficiary);
+    @PostMapping("/add-benef/{userId}")
+    public Beneficiary addBeneficiary(@PathVariable Long userId , @RequestBody Beneficiary beneficiary){
+        return beneficiaryService.addBeneficiary(userId, beneficiary);
     }
 
     @DeleteMapping
@@ -25,7 +25,7 @@ public class BeneficiaryController {
         beneficiaryService.deleteBeneficiary(id);
     }
 
-    @GetMapping
+    @GetMapping("/beneficiaries/1")
     public List<Beneficiary> getAllBeneficiary(@PathVariable Long userId){
        return beneficiaryService.findAllBeneficiary(userId);
     }

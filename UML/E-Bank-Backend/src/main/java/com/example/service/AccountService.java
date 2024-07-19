@@ -1,5 +1,6 @@
 package com.example.service;
 
+import com.example.enums.AccountStatus;
 import com.example.model.Account;
 import com.example.model.Card;
 import com.example.model.User;
@@ -83,6 +84,12 @@ public class AccountService {
 
     public void deleteAccount(Long accountId) {
             accountRepo.deleteById(accountId);
+    }
+
+    public Account closeAccount(Long accountId){
+        Account account = accountRepo.findById(accountId).orElseThrow(() -> new RuntimeException("Account not found"));
+        account.setAccountStatus(AccountStatus.BLOCKED);
+        return  account;
     }
 
 

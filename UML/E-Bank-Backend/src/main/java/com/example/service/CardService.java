@@ -14,20 +14,20 @@ public class CardService {
     CardRepository cardRepo;
 
 
-    public Card blockCard(Long cardId){
-        Card card = cardRepo.findById(cardId).get();
+    public Card blockCard(Long accountId){
+        Card card = cardRepo.findByAccountId(accountId).orElseThrow(() -> new RuntimeException("Card not found"));
         card.setStatus(CardStatus.blocked);
         return card;
     }
 
-    public Card deactivateCard(Long cardId){
-        Card card = cardRepo.findById(cardId).get();
+    public Card deactivateCard(Long accountId){
+        Card card = cardRepo.findByAccountId(accountId).orElseThrow(() -> new RuntimeException("Card not found"));
         card.setStatus(CardStatus.inactive);
         return card;
     }
 
-    public Card activateCard(Long cardId){
-        Card card = cardRepo.findById(cardId).get();
+    public Card activateCard(Long accountId){
+        Card card = cardRepo.findByAccountId(accountId).orElseThrow(() -> new RuntimeException("Card not found"));
         card.setStatus(CardStatus.active);
         return card;
     }

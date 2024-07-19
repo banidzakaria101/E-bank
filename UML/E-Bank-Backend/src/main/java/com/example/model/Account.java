@@ -1,5 +1,6 @@
 package com.example.model;
 
+import com.example.enums.AccountStatus;
 import com.example.enums.AccountType;
 import com.example.enums.BankName;
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -29,6 +30,7 @@ public class Account {
     private AccountType accountType;
     private BankName bankName;
     private LocalDateTime createdAt;
+    private AccountStatus accountStatus;
 
     @ManyToOne
     @JoinColumn(name = "user_id")

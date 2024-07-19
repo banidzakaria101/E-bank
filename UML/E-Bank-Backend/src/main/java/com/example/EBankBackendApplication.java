@@ -9,4 +9,7 @@ public class EBankBackendApplication {
     public static void main(String[] args) {
         SpringApplication.run(EBankBackendApplication.class, args);
     }
+
+
+
 }
